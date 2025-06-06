@@ -1,0 +1,1 @@
+{"outputs":{},"variables":{},"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","functions":[],"apiProfile":"","resources":[{"apiVersion":"2016-09-01","name":"resource_ref_","type":"Microsoft.insights/logprofiles","properties":{"retentionPolicy":{"days":200,"enabled":true}}}],"contentVersion":"","parameters":{}}
