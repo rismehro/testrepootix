@@ -1,0 +1,388 @@
+{
+    "provider": {
+        "azurerm": {
+            "version": "=1.21.0",
+            "client_id": "12345",
+            "client_secret": "hello123"
+        }
+    },
+    "resource": {
+        "azurerm_managed_disk": {
+            "test": {
+                "create_option": "Empty",
+                "disk_size_gb": "1",
+                "encryption_settings": {
+                    "enabled": false
+                },
+                "location": "West US 2",
+                "name": "acctestmd",
+                "resource_group_name": "${azurerm_resource_group.test.name}",
+                "storage_account_type": "Standard_LRS"
+            }
+        },
+        "azurerm_monitor_log_profile": {
+            "test": {
+                "categories": [
+                    "Action",
+                    "Delete",
+                    "Write"
+                ],
+                "locations": [
+                    "westus",
+                    "global"
+                ],
+                "name": "default",
+                "retention_policy": {
+                    "days": 7,
+                    "enabled": true
+                },
+                "servicebus_rule_id": "${azurerm_eventhub_namespace.test.id}/authorizationrules/RootManageSharedAccessKey",
+                "storage_account_id": "${azurerm_storage_account.test.id}"
+            }
+        },
+        "azurerm_network_security_group": {
+            "test": {
+                "location": "${azurerm_resource_group.test.location}",
+                "name": "acceptanceTestSecurityGroup1",
+                "resource_group_name": "${azurerm_resource_group.test.name}",
+                "security_rule": {
+                    "access": "Allow",
+                    "destination_address_prefix": "*",
+                    "destination_port_range": "*",
+                    "direction": "Inbound",
+                    "name": "test123",
+                    "priority": 100,
+                    "protocol": "Tcp",
+                    "source_address_prefix": "*",
+                    "source_port_range": "*"
+                },
+                "tags": {
+                    "environment": "Production"
+                }
+            }
+        },
+        "azurerm_resource_group": {
+            "test": {
+                "location": "West US",
+                "name": "acceptanceTestResourceGroup1"
+            }
+        },
+        "azurerm_security_center_contact": {
+            "example": {
+                "alert_notifications": false,
+                "alerts_to_admins": false,
+                "email": "contact@example.com",
+                "phone": "+1-555-555-5555"
+            }
+        },
+        "azurerm_security_center_subscription_pricing": {
+            "example": {
+                "tier": "Free"
+            }
+        },
+        "azurerm_sql_database": {
+            "test": {
+                "location": "West US",
+                "name": "mysqldatabase",
+                "resource_group_name": "${azurerm_resource_group.test.name}",
+                "server_name": "${azurerm_sql_server.test.name}",
+                "threat_detection_policy": {
+                    "disabled_alerts": "Sql_Injection_Vulnerability",
+                    "email_account_admins": false,
+                    "email_addresses": [
+                        "a@sophos.com",
+                        "b@sophos.com"
+                    ],
+                    "retention_days": 70,
+                    "state": "Disabled"
+                },
+                "import": {
+                    "administrator_login_password": "password",
+                    "storage_key": "password"
+                }
+            }
+        },
+        "azurerm_sql_firewall_rule": {
+            "test": {
+                "end_ip_address": "10.0.17.62",
+                "name": "FirewallRule1",
+                "resource_group_name": "usygd",
+                "server_name": "sjhgd",
+                "start_ip_address": "0.0.0.0"
+            }
+        },
+        "azurerm_sql_server": {
+            "test": {
+                "administrator_login": "4dm1n157r470r",
+                "administrator_login_password": "4-v3ry-53cr37-p455w0rd",
+                "location": "West US",
+                "name": "mysqlserver",
+                "resource_group_name": "${azurerm_resource_group.test.name}",
+                "version": "12.0"
+            }
+        },
+        "azurerm_storage_account": {
+            "testsa": {
+                "account_tier": "Standard",
+                "enable_blob_encryption": false,
+                "enable_file_encryption": false,
+                "location": "westus",
+                "name": "storageaccountname",
+                "resource_group_name": "${azurerm_resource_group.testrg.name}",
+                "tags": {
+                    "environment": "staging"
+                }
+            }
+        },
+        "azurerm_virtual_machine": {
+            "main_linux": {
+                "os_profile_linux_config": {
+                    "disable_password_authentication": false
+                },
+                "os_profile": {
+                    "admin_password": "password"
+                }
+            },
+            "main_windows": {
+                "os_profile_windows_config": {
+                    "enable_automatic_upgrades": false
+                }
+            }
+        },
+        "azurerm_api_management": {
+            "resource_ref": {
+                "certificate": {
+                    "certificate_password": "password"
+                },
+                "hostname_configuration": {
+                    "management": {
+                        "certificate_password": "password"
+                    },
+                    "portal": {
+                        "certificate_password": "password"
+                    },
+                    "scm": {
+                        "certificate_password": "password"
+                    },
+                    "proxy": {
+                        "certificate_password": "password"
+                    }
+                }
+            }
+        },
+        "azurerm_api_management_authorization_server": {
+            "resource_ref": {
+                "resource_owner_password": "password",
+                "client_secret": "password"
+            }
+        },
+        "azurerm_api_management_backend": {
+            "resource_ref": {
+                "proxy": {
+                    "password": "password"
+                }
+            }
+        },
+        "azurerm_api_management_certificate": {
+            "resource_ref": {
+                "password": "password"
+            }
+        },
+        "azure_api_management_identity_provider_aad": {
+            "resource_ref": {
+                "client_secret": "password"
+            }
+        },
+        "azure_api_management_identity_provider_google": {
+            "resource_ref": {
+                "client_secret": "password"
+            }
+        },
+        "azurerm_api_management_openid_connect_provider": {
+            "resource_ref": {
+                "client_secret": "password"
+            }
+        },
+        "azurerm_api_management_user": {
+            "resource_ref": {
+                "password": "password"
+            }
+        },
+        "azurerm_app_service": {
+            "resource_ref": {
+                "auth_settings": {
+                    "facebook": {
+                        "client_secret": "password"
+                    },
+                    "google": {
+                        "client_secret": "password"
+                    },
+                    "microsoft": {
+                        "client_secret": "password"
+                    }
+                },
+                "storage_account": {
+                    "access_key": "password"
+                }
+            }
+        },
+        "azure_app_service_certificate": {
+            "resource_ref": {
+                "password": "password"
+            }
+        },
+        "azurerm_app_service_slot": {
+            "resource_ref": {
+                "auth_settings": {
+                    "facebook": {
+                        "app_secret": "password"
+                    },
+                    "google": {
+                        "client_secret": "password"
+                    },
+                    "microsoft": {
+                        "client_secret": "password"
+                    }
+                }
+            }
+        },
+        "azurerm_app_service_source_control_token": {
+            "resource_ref": {
+                "token": "password",
+                "token_secret": "password"
+            }
+        },
+        "azurerm_function_app": {
+            "resource_ref": {
+                "auth_settings": {
+                    "facebook": {
+                        "app_secret": "password"
+                    },
+                    "google": {
+                        "client_secret": "password"
+                    },
+                    "microsoft": {
+                        "client_secret": "password"
+                    },
+                    "active_directory": {
+                        "client_secret": "password"
+                    }
+                }
+            }
+        },
+        "azurerm_automation_credential": {
+            "resource_ref": {
+                "password": "password"
+            }
+        },
+        "azurerm_batch_certificate": {
+            "resource_ref": {
+                "password": "password"
+            }
+        },
+        "azurerm_bot_channel_Email": {
+            "resource_ref": {
+                "email_password": "password"
+            }
+        },
+        "azurerm_bot_channel_slack": {
+            "resource_ref": {
+                "client_secret": "password",
+                "verification_token": "password"
+            }
+        },
+        "azurerm_bot_channels_registration": {
+            "resource_ref": {
+                "developer_app_insights_key": "password",
+                "developer_app_insights_api_key": "password"
+            }
+        },
+        "azurerm_bot_connection": {
+            "resource_ref": {
+                "client_secret": "password"
+            }
+        },
+        "azurerm_bot_web_app": {
+            "resource_ref": {
+                "developer_app_insights_key": "password",
+                "developer_app_insights_api_key": "password",
+                "luis_key": "password"
+            }
+        },
+        "azurerm_virtual_machine_scale_set": {
+            "resource_ref": {
+                "os_profile": {
+                    "admin_password": "password"
+                }
+            }
+        },
+        "azurerm_container_group": {
+            "resource_ref": {
+                "container": {
+                    "volume": {
+                        "storage_account_key": "password"
+                    }
+                },
+                "image_registry_credential": {
+                    "password": "password"
+                }
+            }
+        },
+        "azurerm_kubernetes_cluster": {
+            "resource_ref": {
+                "role_based_access_control": {
+                    "azure_active_directory": {
+                        "server_app_secret": "password"
+                    }
+                },
+                "service_principal": {
+                    "client_secret": "password"
+                },
+                "windows_profile": {
+                    "admin_password": "password"
+                }
+            }
+        },
+        "azurerm_mariadb_server": {
+            "resource_ref": {
+                "administrator_login_password": "password"
+            }
+        },
+        "azurerm_mysql_server": {
+            "resource_ref": {
+                "administrator_login_password": "password"
+            }
+        },
+        "azurerm_postgresql_server": {
+            "resource_ref": {
+                "administrator_login_password": "password"
+            }
+        },
+        "azurerm_mssql_server_vulnerability_assessment": {
+            "resource_ref": {
+                "storage_container_sas_key": "password",
+                "storage_account_access_key": "password"
+            }
+        },
+        "azurerm_mssql_server_security_alert_policy": {
+            "resource_ref": {
+                "storage_account_access_key": "password"
+            }
+        },
+        "azurerm_data_factory_integration_runtime_managed": {
+            "resource_ref": {
+                "catalog_info": {
+                    "administrator_password": "password"
+                },
+                "custom_setup_script": {
+                    "sas_token": "password"
+                }
+            }
+        },
+        "": {
+            "resource_ref": {
+                "": "password"
+            }
+        }
+    }
+}
