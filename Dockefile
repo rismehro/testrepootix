@@ -1,0 +1,18 @@
+# Use the official Microsoft SQL Server image
+FROM mcr.microsoft.com/mssql/server:2022-latest
+
+# Set environment variables (replace password!)
+ENV ACCEPT_EULA=Y
+ENV SA_PASSWORD=StrongP@ssw0rd123
+
+# Expose SQL Server port
+EXPOSE 1433
+
+# Copy initialization scripts
+COPY ./init-scripts/ /usr/src/app/init-scripts/
+
+# Ensure setup.sh is executable
+RUN chmod +x /usr/src/app/init-scripts/setup.sh
+
+# Start SQL Server and run setup script
+CMD /bin/bash -c "/usr/src/app/init-scripts/setup.sh && /opt/mssql/bin/sqlservr"
